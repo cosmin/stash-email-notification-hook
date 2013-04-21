@@ -1,0 +1,327 @@
+#* @vtlvariable name="filenames" type="java.util.List<java.lang.String>" *#
+#* @vtlvariable name="changesets" type="java.util.List<com.atlassian.stash.content.Changeset>" *#
+#* @vtlvariable name="settings" type="com.risingoak.stash.plugins.hook.EmailNotificationSettings" *#
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+        "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=3Dutf-8"/>
+    <title>$subject</title>
+</head>
+<body>
+<style type="text/css"><!--
+#msg dl.meta {
+    border: 1px #006 solid;
+    background: #369;
+    padding: 6px;
+    color: #fff;
+}
+
+#msg dl.meta dt {
+    float: left;
+    width: 6em;
+    font-weight: bold;
+}
+
+#msg dt:after {
+    content: ':';
+}
+
+#msg dl, #msg dt, #msg ul, #msg li, #header, #footer, #logmsg {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 10pt;
+}
+
+#msg dl a {
+    font-weight: bold
+}
+
+#msg dl a:link {
+    color: #fc3;
+}
+
+#msg dl a:active {
+    color: #ff0;
+}
+
+#msg dl a:visited {
+    color: #cc6;
+}
+
+h3 {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+#msg pre {
+    overflow: auto;
+    background: #ffc;
+    border: 1px #fa0 solid;
+    padding: 6px;
+}
+
+#logmsg {
+    background: #ffc;
+    border: 1px #fa0 solid;
+    padding: 1em 1em 0 1em;
+}
+
+#logmsg p, #logmsg pre, #logmsg blockquote {
+    margin: 0 0 1em 0;
+}
+
+#logmsg p, #logmsg li, #logmsg dt, #logmsg dd {
+    line-height: 14pt;
+}
+
+#logmsg h1, #logmsg h2, #logmsg h3, #logmsg h4, #logmsg h5, #logmsg h6 {
+    margin: .5em 0;
+}
+
+#logmsg h1:first-child, #logmsg h2:first-child, #logmsg h3:first-child, #logmsg h4:first-child, #logmsg h5:first-child, #logmsg h6:first-child {
+    margin-top: 0;
+}
+
+#logmsg ul, #logmsg ol {
+    padding: 0;
+    list-style-position: inside;
+    margin: 00 0 1em;
+}
+
+#logmsg ul {
+    text-indent: -1em;
+    padding-left: 1em;
+}
+
+#logmsg ol {
+    text-indent: -1.5em;
+    padding-left: 1.5em;
+}
+
+#logmsg > ul, #logmsg > ol {
+    margin: 0 0 1em 0;
+}
+
+#logmsg pre {
+    background: #eee;
+    padding: 1em;
+}
+
+#logmsg blockquote {
+    border: 1px solid #fa0;
+    border-left-width: 10px;
+    padding: 1em 1em 0 1em;
+    background: white;
+}
+
+#logmsg dl {
+    margin: 0;
+}
+
+#logmsg dt {
+    font-weight: bold;
+}
+
+#logmsg dd {
+    margin: 0;
+    padding: 0 0 0.5em 0;
+}
+
+#logmsg dd:before {
+    content: '\00bb';
+}
+
+#logmsg table {
+    border-spacing: 0px;
+    border-collapse: collapse;
+    border-top: 4px solid #fa0;
+    border-bottom: 1px solid #fa0;
+    background: #fff;
+}
+
+#logmsg table th {
+    text-align: left;
+    font-weight: normal;
+    padding: 0.2em 0.5em;
+    border-top: 1px dotted #fa0;
+}
+
+#logmsg table td {
+    text-align: right;
+    border-top: 1px dotted #fa0;
+    padding: 0.2em 0.5em;
+}
+
+#logmsg table thead th {
+    text-align: center;
+    border-bottom: 1px solid #fa0;
+}
+
+#logmsg table th.Corner {
+    text-align: left;
+}
+
+#logmsg hr {
+    border: none 0;
+    border-top: 2px dashed #fa0;
+    height: 1px;
+}
+
+#header, #footer {
+    color: #fff;
+    background: #636;
+    border: 1px #300 solid;
+    padding: 6px;
+}
+
+#patch {
+    width: 100%;
+}
+
+#patch h4 {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 10pt;
+    padding: 8px;
+    background: #369;
+    color: #fff;
+    margin: 0;
+}
+
+#patch .propset h4, #patch .binary h4 {
+    margin: 0;
+}
+
+#patch pre {
+    padding: 0;
+    line-height: 1.2em;
+    margin: 0;
+}
+
+#patch .diff {
+    width: 100%;
+    background: #eee;
+    padding: 0 0 10px 0;
+    overflow: auto;
+}
+
+#patch .propset .diff, #patch .binary .diff {
+    padding: 10px 0;
+}
+
+#patch span {
+    display: block;
+    padding: 0 10px;
+}
+
+#patch .modfile, #patch .addfile, #patch .delfile, #patch .propset, #patch .binary, #patch .copfile {
+    border: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+#patch ins {
+    background: #dfd;
+    text-decoration: none;
+    display: block;
+    padding: 0 10px;
+}
+
+#patch del {
+    background: #fdd;
+    text-decoration: none;
+    display: block;
+    padding: 0 10px;
+}
+
+#patch .lines, .info {
+    color: #888;
+    background: #fff;
+}
+
+-->
+</style>
+<div id="msg">
+    <div id="header">Automated Stash commit notification - please DO NOT REPLY</div>
+
+    <h3>Commits</h3>
+    #foreach( $commit in $changesets )
+        <dl class="meta">
+            <dt>Revision</dt><dd>$commit.displayId</dd>
+            <dt>Author Name</dt><dd>$commit.author.name</dd>
+            <dt>Author Email</dt><dd>$commit.author.emailAddress</dd>
+            <dt>Date</dt><dd>$commit.authorTimestamp</dd>
+            #if(!$settings.sendCommitMessages())
+            <dt>Message</dt><dd>$commit.message.split("\n").get(0)</dd>
+            #end
+        </dl>
+        #if($settings.sendCommitMessages())
+            <pre>$commit.message</pre>
+        #end
+    #end
+
+    #if($settings.sendChangedFiled())
+    <h3>Modified Paths</h3>
+    <ul>
+        #foreach($filename in $filenames)
+            <li><a href='#${filename.replace("/", "")}'>$filename</a></li>
+        #end
+    </ul>
+    #end
+</div>
+#if($settings.sendFullDiffs())
+<div id="patch">
+    <h3>Diff</h3>
+
+    $diffContentWithHtml
+
+    #foreach($)
+    #end
+    <a id="brancheseric_rel_testcommerceprojectaspectspomxml"></a>
+    <div class="modfile">
+        <h4>Modified: branches/eric_rel_test/commerce-project/aspects/pom.xml (63576 =3D> 63577)</h4>
+        <pre class="diff"><span>
+            <span class="info">--- branches/eric_rel_test/commerce-project/aspects/pom.xml   2013-04-17 20:29:09 UTC (rev 63576)
+                                +++ branches/eric_rel_test/commerce-project/aspects/pom.xml     2013-04-17 20:45:12 UTC (rev 63577)
+            </span><span class="lines">@@ -5,7 +5,7 @@
+            </span><span class="cx">      &lt;parent&gt;
+            </span><span class="cx">              &lt;groupId&gt;com.swacorp.dotcom&lt;/groupId&gt;
+            </span><span class="cx">              &lt;artifactId&gt;dotcom-parent&lt;/artifactId&gt;
+            </span><del>- &lt;version&gt;13.9.SMALLINGTEST.1-SNAPSHOT&lt;/version&gt;
+            </del><ins>+ &lt;version&gt;13.8.SMALLINGTEST.1-SNAPSHOT&lt;/version&gt;
+            </ins><span class="cx">       &lt;/parent&gt;
+            </span><span class="cx">
+            </span><span class="cx">      &lt;groupId&gt;com.swacorp.dotcom&lt;/groupId&gt;
+            </span></span>
+        </pre>
+    </div>
+
+    <a id="brancheseric_rel_testcommerceprojectcommonpomxml"></a>
+    <div class="modfile"><h4>Modified: branches/eric_rel_test/commerce-project/service/gemfire-client/pom.xml (63576 => 63577)</h4>
+        <pre class="diff"><span>
+            <span class="info">--- branches/eric_rel_test/commerce-project/service/gemfire-client/pom.xml       2013-04-17 20:29:09 UTC (rev 63576)
+                               +++ branches/eric_rel_test/commerce-project/service/gemfire-client/pom.xml      2013-04-17 20:45:12 UTC (rev 63577)
+            </span>\
+            <span class="lines">@@ -6,7 +6,7 @@</span>
+            <span class="cx">     &lt;parent&gt;</span>
+            <span class="cx">         &lt;groupId&gt;com.swacorp.dotcom&lt;/groupId&gt;</span>
+            <span class="cx">         &lt;artifactId&gt;dotcom-service&lt;/artifactId&gt;</span>
+            <del>-        &lt;version&gt;13.9.SMALLINGTEST.1-SNAPSHOT&lt;/version&gt;</del>
+            <ins>+        &lt;version&gt;13.8.SMALLINGTEST.1-SNAPSHOT&lt;/version&gt;</ins>
+            <span class="cx">     &lt;/parent&gt;</span>
+            <span class="cx"></span>
+            <span class="cx">     &lt;groupId&gt;com.swacorp.dotcom&lt;/groupId&gt;</span>
+            <span class="lines">@@ -51,7 +51,7 @@</span>
+            <span class="cx">         &lt;dependency&gt;</span>
+            <span class="cx">             &lt;groupId&gt;com.swacorp.dotcom&lt;/groupId&gt;</span>
+            <span class="cx">             &lt;artifactId&gt;service-environment-management&lt;/artifactId&gt;</span>
+            <del>-            &lt;version&gt;13.9.SMALLINGTEST.1-SNAPSHOT&lt;/version&gt;</del>
+            <ins>+            &lt;version&gt;13.8.SMALLINGTEST.1-SNAPSHOT&lt;/version&gt;</ins>
+            <span class="cx">         &lt;/dependency&gt;</span>
+            <span class="cx"></span>
+            <span class="cx">     &lt;/dependencies&gt;</span>
+        </span></pre>
+    </div>
+</div>
+#end
+</body>
+</html>

@@ -1,0 +1,34 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="stash-email-notification-hook"/>
+
+    <!-- the hook -->
+    <repository-hook key="emailNotificationHook" name="Send Email Notifications"
+                     class="com.risingoak.stash.plugins.hook.EmailNotificationHook">
+        <description>Send detailed email notifications for each push.</description>
+        <icon>images/pluginLogo.png</icon>
+        <config-form name="Enforce Author Hook Config" key="emailNotification-config">
+            <view>com.risingoak.stash.plugins.hook.emailNotification.settings.formContents</view>
+            <directory location="/static/"/>
+        </config-form>
+        <validator>com.risingoak.stash.plugins.hook.EmailSettingsValidator</validator>
+    </repository-hook>
+
+    <!-- import from the product container -->
+    <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties"/>
+    <component-import key="mailService" interface="com.atlassian.stash.mail.MailService"/>
+    <component-import key="stashAuthenticationContext" interface="com.atlassian.stash.user.StashAuthenticationContext"/>
+    <component-import key="historyService" interface="com.atlassian.stash.history.HistoryService" />
+    <component-import key="contentService" interface="com.atlassian.stash.content.ContentService" />
+    <component-import key="velocityRenderer" interface="com.atlassian.templaterenderer.TemplateRenderer"/>
+    <component-import key="navBuilder" interface="com.atlassian.stash.nav.NavBuilder"/>
+
+</atlassian-plugin>

@@ -1,0 +1,12 @@
+#* @vtlvariable name="isForcePush" type="java.lang.Boolean" *#
+#* @vtlvariable name="numberOfCommits" type="java.lang.String" *#
+#* @vtlvariable name="UPDATE" type="com.atlassian.stash.repository.RefChangeType" *#
+#* @vtlvariable name="repository" type="com.atlassian.stash.repository.Repository" *#
+#* @vtlvariable name="user" type="com.atlassian.stash.user.StashUser" *#
+#* @vtlvariable name="refChange" type="com.atlassian.stash.repository.RefChange" *#
+#set ($prefix = "[$repository.project.key/$repository.slug] - $refChange.refId")
+#if($isForcePush)
+$prefix forced by $user.displayName
+#else
+$prefix updated with $numberOfCommits commits by $user.displayName
+#end

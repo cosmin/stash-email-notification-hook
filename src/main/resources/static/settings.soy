@@ -1,0 +1,54 @@
+{namespace com.risingoak.stash.plugins.hook.emailNotification.settings}
+
+/**
+ * @param config
+ * @param? errors
+ */
+{template .formContents}
+    {call aui.form.textField}
+        {param id: 'toAddresses' /}
+        {param value: $config['toAddresses'] /}
+        {param labelContent}
+            {stash_i18n('com.risingoak.stash.plugins.hook.email.setting.toAddress.label', 'Address(es)')}
+        {/param}
+        {param descriptionText: stash_i18n('com.risingoak.stash.plugins.hook.email.setting.toAddresses.description', 'Email addresses (comma separated) to notify for each commit.') /}
+        {param errorTexts: $errors ? $errors['toAddresses'] : null /}
+    {/call}
+    {call aui.form.checkboxField}
+        {param legendContent: 'From Address' /}
+        {param fields: [['id'        : 'sendFromAuthor',
+                         'isChecked' : $config['sendFromAuthor'],
+                         'labelText' : stash_i18n('com.risingoak.stash.plugins.hook.email.settings.sendFromAuthor.label', 'Use pusher email address instead of system.') ]] /}
+        {param errorTexts: $errors ? $errors.sendFromAuthor : null /}
+    {/call}
+    {call aui.form.checkboxField}
+        {param legendContent: 'Notify On' /}
+        {param fields: [
+            ['id'        : 'defaultBranch',
+             'isChecked' : $config['defaultBranch'],
+             'labelText' : stash_i18n('com.risingoak.stash.plugins.hook.email.settings.defaultBranch.label', 'Changes to default branch (usually master)') ],
+            ['id'        : 'branchCreateDelete',
+             'isChecked' : $config['branchCreateDelete'],
+             'labelText' : stash_i18n('com.risingoak.stash.plugins.hook.email.settings.branchCreateDelete.label', 'Branch creation/deletion') ],
+            ['id'        : 'allBranches',
+             'isChecked' : $config['allBranches'],
+             'labelText' : stash_i18n('com.risingoak.stash.plugins.hook.email.settings.allBranches.label', 'Commits to all branches.') ],
+        ]/}
+        {param errorTexts: $errors ? $errors.notifyOn : null /}
+    {/call}
+    {call aui.form.checkboxField}
+        {param legendContent: 'Email Options' /}
+        {param fields: [
+            ['id'        : 'commitMessages',
+             'isChecked' : $config['commitMessages'],
+             'labelText' : stash_i18n('com.risingoak.stash.plugins.hook.email.settings.commitMessages.label', 'Include all commit messages.') ],
+            ['id'        : 'changedFiles',
+             'isChecked' : $config['changedFiles'],
+             'labelText' : stash_i18n('com.risingoak.stash.plugins.hook.email.settings.changedFiles.label', 'Include list of changed files.') ],
+            ['id'        : 'fullDiffs',
+             'isChecked' : $config['fullDiffs'],
+             'labelText' : stash_i18n('com.risingoak.stash.plugins.hook.email.settings.fullDiffs.label', 'Include full diffs in email body.') ]
+        ]/}
+        {param errorTexts: $errors ? $errors.emailOptions : null /}
+    {/call}
+{/template}
