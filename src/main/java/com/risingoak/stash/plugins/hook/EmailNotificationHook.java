@@ -22,6 +22,7 @@ import java.io.StringWriter;
 import java.util.*;
 
 import static org.apache.commons.lang.StringUtils.isNotBlank;
+import static org.apache.commons.lang.StringUtils.substring;
 
 public class EmailNotificationHook implements AsyncPostReceiveRepositoryHook {
     private final MailService mailService;
@@ -97,7 +98,8 @@ public class EmailNotificationHook implements AsyncPostReceiveRepositoryHook {
 
     private String getUpdateBody(Repository repository, RefChange refChange, Page<Changeset> changesetPage, StashUser currentUser, EmailNotificationSettings settings) throws IOException {
         Map<String, Object> context = getCommonContext(repository, refChange, currentUser, settings);
-        context.put("changesets", changesetPage.getValues());
+        ArrayList<Changeset> changesets = getChangesets(changesetPage);
+        context.put("changesets", changesets);
         StringWriter body = new StringWriter();
 
         final List<String> filenames = new ArrayList<String>();
@@ -108,11 +110,19 @@ public class EmailNotificationHook implements AsyncPostReceiveRepositoryHook {
         if (settings.sendFullDiffs()) {
             StringBuffer buffer = new StringBuffer();
             renderFullDiffs(repository, refChange, buffer, filenames);
-            context.put("diffContent", buffer.toString());
+            context.put("diffContentWithHtml", buffer.toString());
         }
         context.put("filenames", filenames);
         templateRenderer.render("/templates/email/update-body.vm", context, body);
         return body.toString();
+    }
+
+    private ArrayList<Changeset> getChangesets(Page<Changeset> changesetPage) {
+        ArrayList<Changeset> changesets = new ArrayList<Changeset>();
+        for(Changeset changeset : changesetPage.getValues()) {
+            changesets.add(changeset);
+        }
+        return changesets;
     }
 
     private void sendBranchAddDeleteEmail(Repository repository, RefChange refChange, StashUser currentUser, EmailNotificationSettings settings) throws IOException {
@@ -171,6 +181,8 @@ public class EmailNotificationHook implements AsyncPostReceiveRepositoryHook {
         if (settings.sendFromAuthor() && isNotBlank(currentUser.getEmailAddress())) {
             builder.from(currentUser.getEmailAddress());
         }
+        subject = subject.trim();
+        body = body.trim();
         builder.to(settings.getEmails());
         builder.subject(subject);
         builder.text(body);

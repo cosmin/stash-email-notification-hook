@@ -273,54 +273,6 @@ h3 {
     <h3>Diff</h3>
 
     $diffContentWithHtml
-
-    #foreach($)
-    #end
-    <a id="brancheseric_rel_testcommerceprojectaspectspomxml"></a>
-    <div class="modfile">
-        <h4>Modified: branches/eric_rel_test/commerce-project/aspects/pom.xml (63576 =3D> 63577)</h4>
-        <pre class="diff"><span>
-            <span class="info">--- branches/eric_rel_test/commerce-project/aspects/pom.xml   2013-04-17 20:29:09 UTC (rev 63576)
-                                +++ branches/eric_rel_test/commerce-project/aspects/pom.xml     2013-04-17 20:45:12 UTC (rev 63577)
-            </span><span class="lines">@@ -5,7 +5,7 @@
-            </span><span class="cx">      &lt;parent&gt;
-            </span><span class="cx">              &lt;groupId&gt;com.swacorp.dotcom&lt;/groupId&gt;
-            </span><span class="cx">              &lt;artifactId&gt;dotcom-parent&lt;/artifactId&gt;
-            </span><del>- &lt;version&gt;13.9.SMALLINGTEST.1-SNAPSHOT&lt;/version&gt;
-            </del><ins>+ &lt;version&gt;13.8.SMALLINGTEST.1-SNAPSHOT&lt;/version&gt;
-            </ins><span class="cx">       &lt;/parent&gt;
-            </span><span class="cx">
-            </span><span class="cx">      &lt;groupId&gt;com.swacorp.dotcom&lt;/groupId&gt;
-            </span></span>
-        </pre>
-    </div>
-
-    <a id="brancheseric_rel_testcommerceprojectcommonpomxml"></a>
-    <div class="modfile"><h4>Modified: branches/eric_rel_test/commerce-project/service/gemfire-client/pom.xml (63576 => 63577)</h4>
-        <pre class="diff"><span>
-            <span class="info">--- branches/eric_rel_test/commerce-project/service/gemfire-client/pom.xml       2013-04-17 20:29:09 UTC (rev 63576)
-                               +++ branches/eric_rel_test/commerce-project/service/gemfire-client/pom.xml      2013-04-17 20:45:12 UTC (rev 63577)
-            </span>\
-            <span class="lines">@@ -6,7 +6,7 @@</span>
-            <span class="cx">     &lt;parent&gt;</span>
-            <span class="cx">         &lt;groupId&gt;com.swacorp.dotcom&lt;/groupId&gt;</span>
-            <span class="cx">         &lt;artifactId&gt;dotcom-service&lt;/artifactId&gt;</span>
-            <del>-        &lt;version&gt;13.9.SMALLINGTEST.1-SNAPSHOT&lt;/version&gt;</del>
-            <ins>+        &lt;version&gt;13.8.SMALLINGTEST.1-SNAPSHOT&lt;/version&gt;</ins>
-            <span class="cx">     &lt;/parent&gt;</span>
-            <span class="cx"></span>
-            <span class="cx">     &lt;groupId&gt;com.swacorp.dotcom&lt;/groupId&gt;</span>
-            <span class="lines">@@ -51,7 +51,7 @@</span>
-            <span class="cx">         &lt;dependency&gt;</span>
-            <span class="cx">             &lt;groupId&gt;com.swacorp.dotcom&lt;/groupId&gt;</span>
-            <span class="cx">             &lt;artifactId&gt;service-environment-management&lt;/artifactId&gt;</span>
-            <del>-            &lt;version&gt;13.9.SMALLINGTEST.1-SNAPSHOT&lt;/version&gt;</del>
-            <ins>+            &lt;version&gt;13.8.SMALLINGTEST.1-SNAPSHOT&lt;/version&gt;</ins>
-            <span class="cx">         &lt;/dependency&gt;</span>
-            <span class="cx"></span>
-            <span class="cx">     &lt;/dependencies&gt;</span>
-        </span></pre>
-    </div>
 </div>
 #end
 </body>
