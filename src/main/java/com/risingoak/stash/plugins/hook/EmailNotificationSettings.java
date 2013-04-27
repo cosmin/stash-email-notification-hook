@@ -3,7 +3,9 @@ package com.risingoak.stash.plugins.hook;
 import com.atlassian.stash.setting.Settings;
 import org.hibernate.validator.internal.constraintvalidators.EmailValidator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class EmailNotificationSettings {
     private Settings settings;
@@ -16,20 +18,12 @@ public class EmailNotificationSettings {
         return settings.getBoolean("sendFromAuthor", false);
     }
 
-    public boolean sendCommitMessages() {
-        return settings.getBoolean("commitMessages", false);
-    }
-
     public boolean sendChangedFiled() {
         return settings.getBoolean("changedFiles", false);
     }
 
     public boolean sendFullDiffs() {
         return settings.getBoolean("fullDiffs", false);
-    }
-
-    public boolean notifyOnDefaultBranch() {
-        return settings.getBoolean("defaultBranch", false);
     }
 
     public boolean notifyOnBranchCreateDelete() {
@@ -41,7 +35,11 @@ public class EmailNotificationSettings {
     }
 
     public Iterable<String> getEmails() {
-        return Arrays.asList(settings.getString("toAddresses", "").split(","));
+        List<String> emails = new ArrayList<String>();
+        for(String address : Arrays.asList(settings.getString("toAddresses", "").split(","))) {
+            emails.add(address.trim());
+        }
+        return emails;
     }
 
     public boolean sendAsHtml() {

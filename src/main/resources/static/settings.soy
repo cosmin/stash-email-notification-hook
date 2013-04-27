@@ -24,9 +24,6 @@
     {call aui.form.checkboxField}
         {param legendContent: 'Notify On' /}
         {param fields: [
-            ['id'        : 'defaultBranch',
-             'isChecked' : $config['defaultBranch'],
-             'labelText' : stash_i18n('com.risingoak.stash.plugins.hook.email.settings.defaultBranch.label', 'Changes to default branch (usually master)') ],
             ['id'        : 'branchCreateDelete',
              'isChecked' : $config['branchCreateDelete'],
              'labelText' : stash_i18n('com.risingoak.stash.plugins.hook.email.settings.branchCreateDelete.label', 'Branch creation/deletion') ],
@@ -39,9 +36,6 @@
     {call aui.form.checkboxField}
         {param legendContent: 'Email Options' /}
         {param fields: [
-            ['id'        : 'commitMessages',
-             'isChecked' : $config['commitMessages'],
-             'labelText' : stash_i18n('com.risingoak.stash.plugins.hook.email.settings.commitMessages.label', 'Include all commit messages.') ],
             ['id'        : 'changedFiles',
              'isChecked' : $config['changedFiles'],
              'labelText' : stash_i18n('com.risingoak.stash.plugins.hook.email.settings.changedFiles.label', 'Include list of changed files.') ],

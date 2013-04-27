@@ -36,6 +36,13 @@ class FullDiffContentCallback implements DiffContentCallback {
         } else if (dst == null) {
             buffer.append("<div class=\"delfile\">\n");
             buffer.append("<h4>Deleted: ").append(escapeHtml(src.toString())).append("</h4>\n");
+        } else if (!src.equals(dst)) {
+            buffer.append("<div class=\"modfile\">\n");
+            buffer.append("<h4>Renamed: ");
+            buffer.append(escapeHtml(src.toString()));
+            buffer.append(" => ");
+            buffer.append(escapeHtml(dst.toString()));
+            buffer.append("</h4>\n");
         } else {
             buffer.append("<div class=\"modfile\">\n");
             buffer.append("<h4>Modified: ").append(escapeHtml(dst.toString())).append("</h4>\n");

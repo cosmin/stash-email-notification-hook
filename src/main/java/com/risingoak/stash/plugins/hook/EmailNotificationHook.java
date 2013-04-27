@@ -66,7 +66,7 @@ public class EmailNotificationHook implements AsyncPostReceiveRepositoryHook {
                     }
                 } else if (RefChangeType.UPDATE.equals(refChange.getType())) {
                     String defaultBranchRefId = repositoryMetadataService.getDefaultBranch(context.getRepository()).getId();
-                    if (settings.notifyOnAllCommits() || (defaultBranchRefId.equals(refChange.getRefId()) && settings.notifyOnDefaultBranch())) {
+                    if (settings.notifyOnAllCommits() || (defaultBranchRefId.equals(refChange.getRefId()) && true)) {
                         sendUpdateEmail(context.getRepository(), refChange, currentUser, settings);
                     }
                 }

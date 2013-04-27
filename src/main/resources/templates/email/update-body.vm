@@ -250,16 +250,13 @@ h3 {
             <dt>Author Name</dt><dd>$commit.author.name</dd>
             <dt>Author Email</dt><dd>$commit.author.emailAddress</dd>
             <dt>Date</dt><dd>$commit.authorTimestamp</dd>
-            #if(!$settings.sendCommitMessages())
-            <dt>Message</dt><dd>$commit.message.split("\n").get(0)</dd>
-            #end
         </dl>
         #if($settings.sendCommitMessages())
             <pre>$commit.message</pre>
         #end
     #end
 
-    #if($settings.sendChangedFiled())
+    #if($settings.sendChangedFiled() || $settings.sendFullDiffs())
     <h3>Modified Paths</h3>
     <ul>
         #foreach($filename in $filenames)
@@ -271,7 +268,6 @@ h3 {
 #if($settings.sendFullDiffs())
 <div id="patch">
     <h3>Diff</h3>
-
     $diffContentWithHtml
 </div>
 #end
