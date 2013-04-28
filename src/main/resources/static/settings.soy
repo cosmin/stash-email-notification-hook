@@ -25,9 +25,6 @@
     {call aui.form.checkboxField}
         {param legendContent: 'Notify On' /}
         {param fields: [
-            ['id'        : 'branchCreateDelete',
-             'isChecked' : $config['branchCreateDelete'],
-             'labelText' : stash_i18n('com.risingoak.stash.plugins.hook.email.settings.branchCreateDelete.label', 'Branch creation/deletion') ],
             ['id'        : 'allBranches',
              'isChecked' : $config['allBranches'],
              'labelText' : stash_i18n('com.risingoak.stash.plugins.hook.email.settings.allBranches.label', 'Commits to all branches.') ],

@@ -26,10 +26,6 @@ public class EmailNotificationSettings {
         return settings.getBoolean("fullDiffs", false);
     }
 
-    public boolean notifyOnBranchCreateDelete() {
-        return settings.getBoolean("branchCreateDelete", false);
-    }
-
     public boolean notifyOnAllCommits() {
         return settings.getBoolean("allBranches", false);
     }

@@ -58,15 +58,9 @@ public class EmailNotificationHook implements AsyncPostReceiveRepositoryHook {
 
         for (RefChange refChange : refChanges) {
             try {
-                if (RefChangeType.ADD.equals(refChange.getType()) || RefChangeType.DELETE.equals(refChange.getType())) {
-                    if (settings.notifyOnBranchCreateDelete()) {
-                        sendBranchAddDeleteEmail(context.getRepository(), refChange, currentUser, settings);
-                    }
-                } else if (RefChangeType.UPDATE.equals(refChange.getType())) {
-                    String defaultBranchRefId = repositoryMetadataService.getDefaultBranch(context.getRepository()).getId();
-                    if (settings.notifyOnAllCommits() || (defaultBranchRefId.equals(refChange.getRefId()) && true)) {
-                        sendUpdateEmail(context.getRepository(), refChange, currentUser, settings);
-                    }
+                String defaultBranchRefId = repositoryMetadataService.getDefaultBranch(context.getRepository()).getId();
+                if (settings.notifyOnAllCommits() || (defaultBranchRefId.equals(refChange.getRefId()) && true)) {
+                    sendUpdateEmail(context.getRepository(), refChange, currentUser, settings);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -128,31 +122,12 @@ public class EmailNotificationHook implements AsyncPostReceiveRepositoryHook {
 
     private ArrayList<Changeset> getChangesets(Page<Changeset> changesetPage) {
         ArrayList<Changeset> changesets = new ArrayList<Changeset>();
-        for(Changeset changeset : changesetPage.getValues()) {
+        for (Changeset changeset : changesetPage.getValues()) {
             changesets.add(changeset);
         }
         return changesets;
     }
 
-    private void sendBranchAddDeleteEmail(Repository repository, RefChange refChange, StashUser currentUser, EmailNotificationSettings settings) throws IOException {
-        String subject = getAddDeleteEmailSubject(repository, refChange, currentUser, settings);
-        String body = getBranchAddDeleteBody(repository, refChange, currentUser, settings);
-        sendEmail(settings, currentUser, subject, body);
-    }
-
-    private String getAddDeleteEmailSubject(Repository repository, RefChange refChange, StashUser currentUser, EmailNotificationSettings settings) throws IOException {
-        Map<String, Object> context = getCommonContext(repository, refChange, currentUser, settings);
-        StringWriter subject = new StringWriter();
-        templateRenderer.render("/templates/email/add-delete-subject.vm", context, subject);
-        return subject.toString();
-    }
-
-    private String getBranchAddDeleteBody(Repository repository, RefChange refChange, StashUser currentUser, EmailNotificationSettings settings) throws IOException {
-        Map<String, Object> context = getCommonContext(repository, refChange, currentUser, settings);
-        StringWriter body = new StringWriter();
-        templateRenderer.render("/templates/email/add-delete-body.vm", context, body);
-        return body.toString();
-    }
 
     private Map<String, Object> getCommonContext(Repository repository, RefChange refChange, StashUser currentUser, EmailNotificationSettings settings) {
         Map<String, Object> context = new HashMap<String, Object>();
