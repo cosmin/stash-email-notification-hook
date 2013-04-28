@@ -20,8 +20,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.*;
 
-import static org.apache.commons.lang.StringUtils.isNotBlank;
-
 public class EmailNotificationHook implements AsyncPostReceiveRepositoryHook {
     private final MailService mailService;
     private final StashAuthenticationContext stashAuthenticationContext;

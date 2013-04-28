@@ -1,7 +1,6 @@
 package com.risingoak.stash.plugins.hook;
 
 import com.atlassian.stash.mail.MailService;
-import com.atlassian.stash.nav.NavBuilder;
 import com.atlassian.stash.repository.Repository;
 import com.atlassian.stash.setting.RepositorySettingsValidator;
 import com.atlassian.stash.setting.Settings;
