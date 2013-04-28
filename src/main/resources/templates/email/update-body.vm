@@ -8,27 +8,19 @@
 </head>
 <body>
 <style><!--
-    #msg dl a {
+    dl a {
         font-weight: bold
     }
 
-    #msg dl a:link {
+    dl a:link {
         color: #fc3;
-    }
-
-    #msg dl a:active {
-        color: #ff0;
-    }
-
-    #msg dl a:visited {
-        color: #cc6;
     }
 --></style>
 <h1 style="font-family: verdana, arial, helvetica, sans-serif;font-size: 16pt;">
     <a href="${navBuilder.project($repository.project).buildAbsolute()}">$repository.project.name</a> / <a href="${navBuilder.repo($repository).buildAbsolute()}">$repository.name</a>
 </h1>
-<div id="msg">
-    <div id="header" style="font-family: verdana, arial, helvetica, sans-serif;font-size: 12pt;">
+<div>
+    <div style="font-family: verdana, arial, helvetica, sans-serif;font-size: 12pt;">
         #set($removedCommitsDisplay = "#if($removedCommits.size() == 1)commit#{else}commits#{end}")
         #set($newCommitsDisplay = "#if($removedCommits.size() == 1)commit#{else}commits#{end}")
 
@@ -47,7 +39,7 @@
     #if($removedCommits.size() > 0)
         <h3 style="font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;font-weight: bold;">Removed Commits</h3>
         #foreach( $commit in $removedCommits )
-            <dl class="meta" style="font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;border: 1px #006 solid;background: rgb(129, 32, 13);padding: 6px;color: #fff;">
+            <dl style="font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;border: 1px #006 solid;background: rgb(129, 32, 13);padding: 6px;color: #fff;">
                 <dt style="font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;float: left;width: 6em;font-weight: bold;">Revision:</dt><dd><a href="${navBuilder.repo($repository).changeset($commit.id).buildAbsolute()}" style="font-weight: bold; color: #fc3;">$commit.displayId</a></dd>
                 <dt style="font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;float: left;width: 6em;font-weight: bold;">Name:</dt><dd>$commit.author.name</dd>
                 <dt style="font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;float: left;width: 6em;font-weight: bold;">Email:</dt><dd><a href="mailto:$commit.author.emailAddress" style="font-weight: bold; color: #fc3;">$commit.author.emailAddress</a></dd>
@@ -60,7 +52,7 @@
     #if($commits.size() > 0)
         <h3 style="font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;font-weight: bold;">New Commits</h3>
         #foreach( $commit in $commits )
-            <dl class="meta" style="font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;border: 1px #006 solid;background: #369;padding: 6px;color: #fff;">
+            <dl style="font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;border: 1px #006 solid;background: #369;padding: 6px;color: #fff;">
                 <dt style="font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;float: left;width: 6em;font-weight: bold;">Revision:</dt><dd><a href="${navBuilder.repo($repository).changeset($commit.id).buildAbsolute()}" style="font-weight: bold; color: #fc3;">$commit.displayId</a></dd>
                 <dt style="font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;float: left;width: 6em;font-weight: bold;">Name:</dt><dd>$commit.author.name</dd>
                 <dt style="font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;float: left;width: 6em;font-weight: bold;">Email:</dt><dd><a href="mailto:$commit.author.emailAddress" style="font-weight: bold; color: #fc3;">$commit.author.emailAddress</a></dd>
@@ -80,7 +72,7 @@
     #end
 </div>
 #if($settings.sendFullDiffs() && $filenames.size() > 0)
-<div id="patch" style="width: 100%;">
+<div style="width: 100%;">
     <h3 style="font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;font-weight: bold;">Diff</h3>
     $diffContentWithHtml
 </div>

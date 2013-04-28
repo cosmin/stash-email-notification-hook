@@ -31,14 +31,14 @@ class FullDiffContentCallback implements DiffContentCallback {
         buffer.append("<a id=\"").append(pathToUse.replace("/", "").replace(" ", "")).append("\"></a>\n");
 
         if (src == null) {
-            buffer.append("<div class=\"addfile\" style=\"border: 1px solid #ccc;margin: 10px 0;\">\n");
+            buffer.append("<div style=\"border: 1px solid #ccc;margin: 10px 0;\">\n");
             buffer.append("<h4 style=\"font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;padding: 8px;background: rgb(49, 104, 49);color: #fff;margin: 0;\">Added: ").append(escapeHtml(dst.toString())).append("</h4>\n");
         } else if (dst == null) {
-            buffer.append("<div class=\"delfile\" style=\"border: 1px solid #ccc;margin: 10px 0;\">\n");
+            buffer.append("<div style=\"border: 1px solid #ccc;margin: 10px 0;\">\n");
             buffer.append("<h4 style=\"font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;padding: 8px;background: rgb(129, 32, 13);color: #fff;margin: 0;\">");
             buffer.append("Deleted: ").append(escapeHtml(src.toString())).append("</h4>\n");
         } else if (!src.equals(dst)) {
-            buffer.append("<div class=\"modfile\" style=\"border: 1px solid #ccc;margin: 10px 0;\">\n");
+            buffer.append("<div style=\"border: 1px solid #ccc;margin: 10px 0;\">\n");
             buffer.append("<h4 style=\"font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;padding: 8px;background: #369;color: #fff;margin: 0;\">");
             buffer.append("Renamed: ");
             buffer.append(escapeHtml(src.toString()));
@@ -46,12 +46,12 @@ class FullDiffContentCallback implements DiffContentCallback {
             buffer.append(escapeHtml(dst.toString()));
             buffer.append("</h4>\n");
         } else {
-            buffer.append("<div class=\"modfile\" style=\"border: 1px solid #ccc;margin: 10px 0;\">\n");
+            buffer.append("<div style=\"border: 1px solid #ccc;margin: 10px 0;\">\n");
             buffer.append("<h4 style=\"font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;padding: 8px;background: #369;color: #fff;margin: 0;\">");
             buffer.append("Modified: ").append(escapeHtml(dst.toString())).append("</h4>\n");
         }
-        buffer.append("<pre class=\"diff\" style=\"line-height: 1.2em;margin: 0;width: 100%;background: #eee;overflow: auto;\">");
-        buffer.append("<span style=\"display: block;\"><span class=\"info\" style=\"color: #888;background: #fff;display: block;padding: 0 10px 10px 10px;\">\n");
+        buffer.append("<pre style=\"line-height: 1.2em;margin: 0;width: 100%;background: #eee;overflow: auto;\">");
+        buffer.append("<span style=\"display: block;\"><span style=\"color: #888;background: #fff;display: block;padding: 0 10px 10px 10px;\">\n");
         buffer.append("--- ").append(src != null ? escapeHtml(src.toString()) : "/dev/null").append("\n");
         buffer.append("+++ ").append(dst != null ? escapeHtml(dst.toString()) : "/dev/null").append("\n");
     }
@@ -67,22 +67,22 @@ class FullDiffContentCallback implements DiffContentCallback {
         buffer.append("<a id=\"").append(pathToUse).append("\"></a>\n");
 
         if (src == null) {
-            buffer.append("<div class=\"binary\" style=\"border: 1px solid #ccc;margin: 10px 0;\">\n");
+            buffer.append("<div style=\"border: 1px solid #ccc;margin: 10px 0;\">\n");
             buffer.append("<h4 style=\"font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;padding: 8px;background: rgb(49, 104, 49);color: #fff;margin: 0;\">");
             buffer.append("Added (binary): ").append(escapeHtml(dst.toString())).append("</h4>");
         } else if (dst == null) {
-            buffer.append("<div class=\"binary\" style=\"border: 1px solid #ccc;margin: 10px 0;\">\n");
+            buffer.append("<div style=\"border: 1px solid #ccc;margin: 10px 0;\">\n");
             buffer.append("<h4 style=\"font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;padding: 8px;background: rgb(129, 32, 13);color: #fff;margin: 0;\">");
             buffer.append("Deleted (binary): ").append(escapeHtml(src.toString())).append("</h4>");
         } else if (!src.equals(dst)) {
-            buffer.append("<div class=\"binary\" style=\"border: 1px solid #ccc;margin: 10px 0;\">\n");
+            buffer.append("<div style=\"border: 1px solid #ccc;margin: 10px 0;\">\n");
             buffer.append("<h4 style=\"font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;padding: 8px;background: #369;color: #fff;margin: 0;\">");
             buffer.append("Renamed (binary): ");
             buffer.append(escapeHtml(src.toString()));
             buffer.append(" => ");
             buffer.append(escapeHtml(dst.toString()));
         } else {
-            buffer.append("<div class=\"binary\" style=\"border: 1px solid #ccc;margin: 10px 0;\">\n");
+            buffer.append("<div style=\"border: 1px solid #ccc;margin: 10px 0;\">\n");
             buffer.append("<h4 style=\"font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;padding: 8px;background: #369;color: #fff;margin: 0;\">");
             buffer.append("Modified (binary): ").append(escapeHtml(dst.toString())).append("</h4>");
         }
@@ -93,7 +93,7 @@ class FullDiffContentCallback implements DiffContentCallback {
     public void onDiffEnd(boolean truncated) throws IOException {
         if (truncated) {
             // TODO handle truncated diffs
-            // buffer.append("<span class='lines'>... diff truncated ...</span>");
+            // buffer.append("<span>... diff truncated ...</span>");
         }
         buffer.append("</span></pre></div>");
     }
@@ -101,7 +101,7 @@ class FullDiffContentCallback implements DiffContentCallback {
 
     @Override
     public void onHunkStart(int srcLine, int srcSpan, int dstLine, int dstSpan) throws IOException {
-        buffer.append("<span class=\"lines\" style=\"display: block;color: #888;background: #fff;\">@@ ");
+        buffer.append("<span style=\"display: block;color: #888;background: #fff;\">@@ ");
         buffer.append("-").append(srcLine).append(",").append(srcSpan).append(" +").append(dstLine).append(",").append(dstSpan);
         buffer.append("@@</span>\n");
     }
@@ -110,7 +110,7 @@ class FullDiffContentCallback implements DiffContentCallback {
     public void onHunkEnd(boolean truncated) throws IOException {
         if (truncated) {
             // TODO handle truncated hunks
-            // buffer.append("<span class='lines'>... hunk truncated ...</span>");
+            // buffer.append("<span>... hunk truncated ...</span>");
         }
     }
 
@@ -122,7 +122,7 @@ class FullDiffContentCallback implements DiffContentCallback {
     @Override
     public void onSegmentLine(@Nonnull String line, @Nullable ConflictMarker marker, boolean truncated) throws IOException {
         if (currentSegmentType == DiffSegmentType.CONTEXT) {
-            buffer.append("<span class=\"cx\" style=\"display: block;\">&nbsp;");
+            buffer.append("<span style=\"display: block;\">&nbsp;");
             buffer.append(escapeHtml(line));
             buffer.append("</span>\n");
         } else if (currentSegmentType == DiffSegmentType.ADDED) {
