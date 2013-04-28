@@ -16,13 +16,6 @@
         {param isRequired: true /}
     {/call}
     {call aui.form.checkboxField}
-        {param legendContent: 'From Address' /}
-        {param fields: [['id'        : 'sendFromAuthor',
-                         'isChecked' : $config['sendFromAuthor'],
-                         'labelText' : stash_i18n('com.risingoak.stash.plugins.hook.email.settings.sendFromAuthor.label', 'Use pusher email address instead of system.') ]] /}
-        {param errorTexts: $errors ? $errors.sendFromAuthor : null /}
-    {/call}
-    {call aui.form.checkboxField}
         {param legendContent: 'Notify On' /}
         {param fields: [
             ['id'        : 'allBranches',

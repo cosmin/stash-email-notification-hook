@@ -14,10 +14,6 @@ public class EmailNotificationSettings {
         this.settings = settings;
     }
 
-    public boolean sendFromAuthor() {
-        return settings.getBoolean("sendFromAuthor", false);
-    }
-
     public boolean sendChangedFiled() {
         return settings.getBoolean("changedFiles", false);
     }

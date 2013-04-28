@@ -89,7 +89,7 @@ public class EmailNotificationHook implements AsyncPostReceiveRepositoryHook {
         String subject = getUpdateEmailSubject(context);
         String body = getUpdateBody(context, repository, refChange, settings);
 
-        sendEmail(settings, currentUser, subject, body);
+        sendEmail(settings, subject, body);
     }
 
     private ArrayList<Changeset> getChangesetsBetween(Repository repository, String fromHash, String toHash) {
@@ -152,11 +152,8 @@ public class EmailNotificationHook implements AsyncPostReceiveRepositoryHook {
         ).getSize() > 0;
     }
 
-    private void sendEmail(EmailNotificationSettings settings, StashUser currentUser, String subject, String body) {
+    private void sendEmail(EmailNotificationSettings settings, String subject, String body) {
         MailMessage.Builder builder = new MailMessage.Builder();
-        if (settings.sendFromAuthor() && isNotBlank(currentUser.getEmailAddress())) {
-            builder.from(currentUser.getEmailAddress());
-        }
         subject = subject.trim();
         body = body.trim();
         builder.to(settings.getEmails());
