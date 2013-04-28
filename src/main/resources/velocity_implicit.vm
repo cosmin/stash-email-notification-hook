@@ -1,0 +1,14 @@
+#* @implicitly included *#
+#* @vtlvariable name="repository" type="com.atlassian.stash.repository.Repository" *#
+#* @vtlvariable name="user" type="com.atlassian.stash.user.StashUser" *#
+#* @vtlvariable name="refChange" type="com.atlassian.stash.repository.RefChange" *#
+#* @vtlvariable name="navBuilder" type="com.atlassian.stash.nav.NavBuilder" *#
+#* @vtlvariable name="ref" type="com.atlassian.stash.repository.Ref" *#
+#* @vtlvariable name="commits" type="java.util.List<com.atlassian.stash.content.Changeset>" *#
+#* @vtlvariable name="removedCommits" type="java.util.List<com.atlassian.stash.content.Changeset>" *#
+#* @vtlvariable name="isForcePush" type="java.lang.Boolean" *#
+#* @vtlvariable name="settings" type="com.risingoak.stash.plugins.hook.EmailNotificationSettings" *#
+#* @vtlvariable name="ADD" type="com.atlassian.stash.repository.RefChangeType" *#
+#* @vtlvariable name="UPDATE" type="com.atlassian.stash.repository.RefChangeType" *#
+#* @vtlvariable name="DELETE" type="com.atlassian.stash.repository.RefChangeType" *#
+

@@ -13,6 +13,7 @@
         {/param}
         {param descriptionText: stash_i18n('com.risingoak.stash.plugins.hook.email.setting.toAddresses.description', 'Email addresses (comma separated) to notify for each commit.') /}
         {param errorTexts: $errors ? $errors['toAddresses'] : null /}
+        {param isRequired: true /}
     {/call}
     {call aui.form.checkboxField}
         {param legendContent: 'From Address' /}
