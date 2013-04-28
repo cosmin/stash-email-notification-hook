@@ -20,7 +20,8 @@
         {param fields: [
             ['id'        : 'allBranches',
              'isChecked' : $config['allBranches'],
-             'labelText' : stash_i18n('com.risingoak.stash.plugins.hook.email.settings.allBranches.label', 'Commits to all branches.') ],
+             'labelText' : stash_i18n('com.risingoak.stash.plugins.hook.email.settings.allBranches.label', 'Commits to all branches.'),
+             'descriptionText' : stash_i18n('com.risingoak.stash.plugins.hook.email.settings.allBranches.description', 'Notify for all branches, not just default (usually master)')],
         ]/}
         {param errorTexts: $errors ? $errors.notifyOn : null /}
     {/call}
