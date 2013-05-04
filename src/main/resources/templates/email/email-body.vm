@@ -24,14 +24,24 @@
         #set($removedCommitsDisplay = "#if($removedCommits.size() == 1)commit#{else}commits#{end}")
         #set($newCommitsDisplay = "#if($removedCommits.size() == 1)commit#{else}commits#{end}")
 
-        #if($isForcePush)
-            #if($commits.size() > 0)
-                #set($action = "removed $removedCommits.size() and added $removedCommits.size() $removedCommitsDisplay to ${ref.displayId}")
+        #if($refChange.type == $UPDATE)
+            #if($isForcePush)
+                #if($commits.size() > 0)
+                    #set($action = "removed $removedCommits.size() and added $removedCommits.size() $removedCommitsDisplay to ${refType}${ref.displayId}")
+                #else
+                    #set($action = "removed $removedCommits.size() $removedCommitsDisplay from ${refType}${ref.displayId}")
+                #end
             #else
-                #set($action = "removed $removedCommits.size() $removedCommitsDisplay from ${ref.displayId}")
+                #set($action = "added $commits.size() $newCommitsDisplay to ${refType}${ref.displayId}")
             #end
-        #else
-            #set($action = "added $commits.size() $newCommitsDisplay to ${ref.displayId}")
+        #elseif($refChange.type == $ADD)
+            #set($action = "added ${refType}${ref.displayId}")
+        #elseif($refChange.type == $DELETE)
+            #if($isForcePush)
+                #set($action = "force deleted ${refType}${ref.displayId}")
+            #else
+                #set($action = "deleted ${refType}${ref.displayId}")
+            #end
         #end
         $user.displayName $action
     </div>
@@ -62,7 +72,7 @@
         #end
     #end
 
-    #if($settings.sendChangedFiled() && $filenames.size() > 0)
+    #if($refChange.type != $DELETE && $settings.sendChangedFiled() && $filenames.size() > 0)
     <h3 style="font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;font-weight: bold;">Modified Paths</h3>
     <ul style="font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;">
         #foreach($filename in $filenames)
@@ -71,7 +81,7 @@
     </ul>
     #end
 </div>
-#if($settings.sendFullDiffs() && $filenames.size() > 0)
+#if($refChange.type != $DELETE && $settings.sendFullDiffs() && $filenames.size() > 0)
 <div style="width: 100%;">
     <h3 style="font-family: verdana, arial, helvetica, sans-serif;font-size: 10pt;font-weight: bold;">Diff</h3>
     $diffContentWithHtml

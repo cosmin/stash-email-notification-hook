@@ -1,4 +1,5 @@
 #* @implicitly included *#
+#* @vtlvariable name="refType" type="java.lang.String" *#
 #* @vtlvariable name="repository" type="com.atlassian.stash.repository.Repository" *#
 #* @vtlvariable name="user" type="com.atlassian.stash.user.StashUser" *#
 #* @vtlvariable name="refChange" type="com.atlassian.stash.repository.RefChange" *#

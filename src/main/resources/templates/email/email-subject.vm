@@ -1,0 +1,23 @@
+#set ($prefix = "[STASH] [] - $refChange.refId")
+#set($removedCommitsDisplay = "#if($removedCommits.size() == 1)commit#{else}commits#{end}")
+#set($newCommitsDisplay = "#if($removedCommits.size() == 1)commit#{else}commits#{end}")
+#if($refChange.type == $UPDATE)
+    #if($isForcePush)
+        #if($commits.size() > 0)
+            #set($action = "removed $removedCommits.size() and added $removedCommits.size() $removedCommitsDisplay to ${refType}${ref.displayId}")
+        #else
+            #set($action = "removed $removedCommits.size() $removedCommitsDisplay from ${refType}${ref.displayId}")
+        #end
+    #else
+        #set($action = "added $commits.size() $newCommitsDisplay to ${refType}${ref.displayId}")
+    #end
+#elseif($refChange.type == $ADD)
+    #set($action = "added ${refType}${ref.displayId}")
+#elseif($refChange.type == $DELETE)
+    #if($isForcePush)
+        #set($action = "force deleted ${refType}${ref.displayId}")
+    #else
+        #set($action = "deleted ${refType}${ref.displayId}")
+    #end
+#end
+[STASH] [$repository.project.key/$repository.slug] $user.displayName $action
